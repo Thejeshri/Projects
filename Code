@@ -1,0 +1,247 @@
+Python 3.8.5 (v3.8.5:580fbb018f, Jul 20 2020, 12:11:27) 
+[Clang 6.0 (clang-600.0.57)] on darwin
+Type "help", "copyright", "credits" or "license()" for more information.
+>>> import datetime
+print("======= Car Loan Processing Application =======")
+def CARLOGO():
+    #strl="CAR LOAN"
+    print_C=[[" " for i in range(5)] for j in range(6)]
+    print_A=[[" " for i in range(5)] for j in range(6)]
+    print_R=[[" " for i in range(5)] for j in range(6)]
+    print_L=[[" " for i in range(5)] for j in range(6)]
+    print_O=[[" " for i in range(5)] for j in range(6)]
+    print_A=[[" " for i in range(5)] for j in range(6)]
+    print_N=[[" " for i in range(5)] for j in range(6)]
+
+    #Code for C
+    for row in range(6):
+        for col in range(5):
+            if (col==0 and (row!=0 and row!=5) or ((row==0 or row==5) and (col>0))):
+                print_C[row][col]="*"
+    #Code for A
+    for row in range(6):
+        for col in range(5):
+            if ((col==0 or col==4) and row!=0) or row==2 or (row==0 and (col!=0 and col!=4)):
+                print_A[row][col]="*"
+                                                             
+    #Code for R
+    for row in range(6):
+        for col in range(5):
+            if (col==0 or (col==3 and (row!=0 and row!=2)) or ((row==0 or row==2) and (col>0 and col<3))):
+                print_R[row][col]="*"
+
+    #Code for L
+    for row in range(6):
+        for col in range(5):
+            if col==0 or row==5:
+                print_L[row][col]="*"
+
+    #Code for O
+    for row in range(6):
+        for col in range(5):
+            if ((row==0 or row==5) and (col!=0 and col!=4)) or ((col==0 or col==4) and (row!=0 and row!=5)):
+                print_O[row][col]="*"
+
+    #Code for A
+    for row in range(6):
+        for col in range(5):
+            if ((col==0 or col==4) and row!=0) or row==2 or (row==0 and (col!=0 and col!=4)):
+                print_A[row][col]="*"
+
+    #Code for N
+    for row in range(6):
+        for col in range(5):
+            if col==0 or col==4 or row==col:
+                print_N[row][col]="*"
+
+    for i in range(6):
+        for j in range(5):
+            print(print_C[i][j],end="")
+        print(end="     ")
+        for j in range(5):
+            print(print_A[i][j],end="")
+        print(end="     ")
+        for j in range(5):
+            print(print_R[i][j],end="")
+        print(end="          ")
+        for j in range(5):
+            print(print_L[i][j],end="")
+        print(end="     ")
+        for j in range(5):
+            print(print_O[i][j],end="")
+        print(end="     ")
+        for j in range(5):
+            print(print_A[i][j],end="")
+        print(end="     ")
+        for j in range(5):
+            print(print_N[i][j],end="")
+        print(end="     ")
+        print()
+def CalculateSalesTax(intRate,CarAmount):
+    return int(intRate*CarAmount)
+def CarLicenseFee():
+    return (0.015)
+def get_last_number():
+    with open("LoanInquiry.txt", "r") as f:
+        lines = f.read()
+        x=lines.splitlines()
+        last_line = x[-1]
+        print(last_line)
+        
+CARLOGO()
+print("Please provide the CAR details to process your LOAN Application")
+print("Please enter your login information")
+d={"abc":"123","bcd":"456","cde":"789","def":"234","efg":"345","fgh":"456","ghi":"567","hij":"678","ijk":"789","jkl":"890"}
+x=(input("Enter your three letter username:"))
+if x not in d:
+    print("The username is not valid")
+else:
+    y=(input("Enter your three letter password:"))
+    if y!=d[x]:
+        print("The password is not valid")
+    else:
+        print("")
+        CarPrice=int(input("Enter the price of the CAR:"))
+        if CarPrice<=100000:
+            print("Enter a reasonable car price. Has to be at least above 1 lakh")
+        else:
+
+           # SalesTax=int(0.07125*CarPrice)
+
+            SalesTax=CalculateSalesTax(0.07125,CarPrice)
+
+            CARLOGO()
+
+            print("Chennai Sales Tax (7.125%):",SalesTax,"rupees")
+
+            #CarLicense=0.015*CarPrice
+            CarLicense=CarLicenseFee()*CarPrice
+            print(CarLicenseFee()*CarPrice)
+            print("Car Registration Fee:",CarLicense,"rupees")
+            DealerDocumentationFee=50
+            print("Dealer Documentation Fee is 50 rupees")
+            WheelageTax=10
+            TotalCost=CarPrice+SalesTax+CarLicense+DealerDocumentationFee+WheelageTax
+            print("Total Cost(Car Price+Chennai Sales Tax+Car Registration Fee+Dealer Documentation Fee+GST tax):",TotalCost,"rupees")
+            DownPayment=int(input("Enter down payment:"))
+            if DownPayment<0.01*CarPrice:
+                print("Down payment must be at least 10% of the car price")
+            else:
+                print("Down Payment:",DownPayment,"rupees")
+                if DownPayment>CarPrice:
+                    print("Please enter a valid down payment amount")
+                else:
+                    if CarPrice-DownPayment<10000:
+                        print("Cannot apply for loans less than 10000 rupees")
+                    else:
+                        AmountToBorrow=TotalCost-DownPayment
+                        print("Car Loan amount after down payment is:",AmountToBorrow,"rupees")
+                        print("Now it's time for you to select a loan plan")
+                        print("Plan A is for 4 years with 6.49% finance rate")
+                        print("Plan B is for 5 years with 7.99% finance rate")
+                        Plan=input("Would you like to view an example of A or B or C(for both):")
+                        if Plan=="A" or Plan=="a":
+                            Principal=AmountToBorrow
+                            FinanceRate=0.0649
+                            LengthOfLoan=4
+                            AmountOfInterest=int(Principal*FinanceRate*LengthOfLoan)
+                            print("Amount Of Interest:",AmountOfInterest)
+                            TotalAmountToRepay=int(Principal+AmountOfInterest)
+                            print("Total Amount To Repay:",TotalAmountToRepay,"rupees")
+                            NumberOfPayments=12*LengthOfLoan
+                            print("Number Of Payments:",NumberOfPayments)
+                            AmountOfMonthlyPayment=int(TotalAmountToRepay/NumberOfPayments)
+                            print("Amount Of Monthly Payment:",AmountOfMonthlyPayment,"rupees")
+                        elif (Plan=="B" or Plan=="b"):
+                            Principal=AmountToBorrow
+                            FinanceRate=0.0799
+                            LengthOfLoan=5
+                            AmountOfInterest=int(Principal*FinanceRate*LengthOfLoan)
+                            print("Amount Of Interest:",AmountOfInterest)
+                            TotalAmountToRepay=int(Principal+AmountOfInterest)
+                            print("Total Amount To Repay:",TotalAmountToRepay,"rupees")
+                            NumberOfPayments=12*LengthOfLoan
+                            print("Number Of Payments:",NumberOfPayments)
+                            AmountOfMonthlyPayment=int(TotalAmountToRepay/NumberOfPayments)
+                            print("Amount Of Monthly Payment:",AmountOfMonthlyPayment,"rupees")
+                        elif Plan=="C" or Plan=="c":
+                            print("Plan A:")
+                            Principal=AmountToBorrow
+                            FinanceRate=0.0649
+                            LengthOfLoan=4
+                            AmountOfInterest=int(Principal*FinanceRate*LengthOfLoan)
+                            print("Amount Of Interest:",AmountOfInterest)
+                            TotalAmountToRepay=int(Principal+AmountOfInterest)
+                            print("Total Amount To Repay:",TotalAmountToRepay,"rupees")
+                            NumberOfPayments=12*LengthOfLoan
+                            print("Number Of Payments:",NumberOfPayments)
+                            AmountOfMonthlyPayment=int(TotalAmountToRepay/NumberOfPayments)
+                            print("Amount Of Monthly Payment:",AmountOfMonthlyPayment,"rupees")
+                            print("")
+                            print("Plan B:")
+                            Principal=AmountToBorrow
+                            FinanceRate=0.0799
+                            LengthOfLoan=5
+                            AmountOfInterest=int(Principal*FinanceRate*LengthOfLoan)
+                            print("Amount Of Interest:",AmountOfInterest)
+                            TotalAmountToRepay=int(Principal+AmountOfInterest)
+                            print("Total Amount To Repay:",TotalAmountToRepay,"rupees")
+                            NumberOfPayments=12*LengthOfLoan
+                            print("Number Of Payments:",NumberOfPayments)
+                            AmountOfMonthlyPayment=int(TotalAmountToRepay/NumberOfPayments)
+                            print("Amount Of Monthly Payment:",AmountOfMonthlyPayment,"rupees")
+                        else:
+                            print("Please select a valid option; Plan A, B or C")
+                        print("")
+                        if Plan=="A" or Plan=="a" or  Plan=="B" or Plan=="b" or Plan=="C" or Plan=="c":
+                            PaymentSchedule=input("Do you want to view the schedule for the first and last payment date for your loan term?(Y or N):")
+                            if PaymentSchedule=="Y" or PaymentSchedule=="y":
+                                if Plan=="C" or Plan=="c":
+                                    f=input("Would you like to display plan A or B?")
+                                    if f=="A" or f=="a":
+                                        dt=datetime.date.today()
+                                        print("Loan Contract Date:",dt)
+                                        print("First Payment Date:",dt.replace(month=dt.month+1,year=dt.year+0),"And the cost due per month is",AmountOfMonthlyPayment,"rupees")
+                                        print("Last Payment Date:",dt.replace(month=dt.month+0,year=dt.year+4),"And the cost due per month is",AmountOfMonthlyPayment,"rupees")
+                                    elif f=="B" or f=="b":
+                                        dt=datetime.date.today()
+                                        print("Loan Contract Date:",dt)
+                                        print("First Payment Date:",dt.replace(month=dt.month+1,year=dt.year+0),"And the cost due per month is",AmountOfMonthlyPayment,"rupees")
+                                        print("Last Payment Date:",dt.replace(month=dt.month+0,year=dt.year+5),"And the cost due per month is",AmountOfMonthlyPayment,"rupees")
+                                else:
+                                    if Plan=="A" or Plan=="a":
+                                        dt=datetime.date.today()
+                                        print("Loan Contract Date:",dt)
+                                        print("First Payment Date:",dt.replace(month=dt.month+1,year=dt.year+0),"And the cost due per month is",AmountOfMonthlyPayment,"rupees")
+                                        print("Last Payment Date:",dt.replace(month=dt.month+0,year=dt.year+4),"And the cost due per month is",AmountOfMonthlyPayment,"rupees")
+                                    elif Plan=="B" or Plan=="b":
+                                        dt=datetime.date.today()
+                                        print("Loan Contract Date:",dt)
+                                        print("First Payment Date:",dt.replace(month=dt.month+1,year=dt.year+0),"And the cost due per month is",AmountOfMonthlyPayment,"rupees")
+                                        print("Last Payment Date:",dt.replace(month=dt.month+0,year=dt.year+5),"And the cost due per month is",AmountOfMonthlyPayment,"rupees")
+                            print("")
+                            y=input("Are you interested in proceeding with your loan?(Y or N):")
+                            if y=="Y" or y=="y":
+                                print("Please provide the necessary customer details")
+                        
+                                Name=input("Enter your first and last name:")
+                                Company=input("Enter your company name:")
+                                HomeAddress=input("Enter your home address:")
+                                HomePhoneNumber=input("Enter your home phone number:")
+                                PersonalEmailID=input("Enter your personal email id:")
+                                WorkAddress=input("Enter your work address:")
+                                WorkPhoneNumber=input("Enter your work phone number:")
+                                WorkEmailID=input("Enter your work email id:")
+                                DateOfBirth=input("Enter your date of birth (DD-MMM-YYYY):")
+                                AadharNumber=input("Enter your aadhar number:")
+                                PanNumber=input("Enter your PAN number:")
+
+                                
+                                
+                                print("Thank for providing your details. The bank will contact you soon for furthur processing.")
+                                print("Thanks for using our Car Loan Processing Application....BYE!!!")
+                            else:
+                                print("Thanks for using our Car Loan Processing Application....BYE!!!")
+                            
+                                        
+
